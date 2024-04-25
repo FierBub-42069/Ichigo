@@ -4,7 +4,8 @@
 using namespace std;
 
 int main() {
-  int n, var = 0;
+  int n, var = 0, num_threads;
+  //omp_set_num_threads(6);
   cout<<"Enter no. of elements:\t";
   cin>>n;
   int array[n] = {0};
@@ -21,6 +22,9 @@ int main() {
 
   clock_t start = clock();
   
+  #pragma omp parallel
+  num_threads = omp_get_num_threads();
+  cout<<"\nNo. of threads:\t"<<num_threads<<endl;
   for(int i=0; i<n; i++) {
     #pragma omp parallel for
     for(int j=var; j<n-1; j+=2) {
